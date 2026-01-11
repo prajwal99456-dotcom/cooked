@@ -1,0 +1,127 @@
+/**
+ * LuminaAI Builder - Code Editor Styles
+ * 
+ * Monaco Editor theming and overrides
+ */
+
+/* Monaco Editor Container */
+#monacoEditor {
+    background: var(--bg-primary);
+}
+
+/* Override Monaco's default styles */
+.monaco-editor {
+    font-family: var(--font-mono) !important;
+}
+
+.monaco-editor .view-lines {
+    font-family: var(--font-mono) !important;
+}
+
+/* Editor placeholder when no file is open */
+.editor-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 40px;
+}
+
+.editor-placeholder-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.editor-placeholder-text {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.editor-placeholder-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Editor Status Bar */
+.editor-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 12px;
+    background: var(--bg-tertiary);
+    border-top: 1px solid var(--border-primary);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.editor-status-left {
+    display: flex;
+    gap: 16px;
+}
+
+.editor-status-right {
+    display: flex;
+    gap: 16px;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Modified indicator */
+.file-modified {
+    color: var(--warning);
+}
+
+/* Syntax highlighting colors (for non-Monaco contexts) */
+.syntax-keyword {
+    color: #C586C0;
+}
+
+.syntax-string {
+    color: #CE9178;
+}
+
+.syntax-number {
+    color: #B5CEA8;
+}
+
+.syntax-comment {
+    color: #6A9955;
+}
+
+.syntax-function {
+    color: #DCDCAA;
+}
+
+.syntax-variable {
+    color: #9CDCFE;
+}
+
+.syntax-type {
+    color: #4EC9B0;
+}
+
+.syntax-operator {
+    color: #D4D4D4;
+}
+
+.syntax-punctuation {
+    color: #D4D4D4;
+}
+
+.syntax-tag {
+    color: #569CD6;
+}
+
+.syntax-attribute {
+    color: #9CDCFE;
+}

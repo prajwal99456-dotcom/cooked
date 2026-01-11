@@ -1,0 +1,438 @@
+/**
+ * LuminaAI Builder - Preview & Layout Styles
+ * 
+ * Clean, minimal design matching anime.js aesthetic
+ */
+
+/* Main Panel */
+.main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 20px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+/* Preview Container */
+.preview-container {
+    width: 100%;
+    height: 100%;
+    background: #0a0a0a;
+    overflow: hidden;
+}
+
+#previewFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #0a0a0a;
+}
+
+/* Sandpack Styles */
+#sandpack-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* Override Sandpack to only show preview */
+#sandpack-container .sp-wrapper {
+    height: 100% !important;
+}
+
+#sandpack-container .sp-layout {
+    height: 100% !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Hide the code editor panel in Sandpack */
+#sandpack-container .sp-code-editor {
+    display: none !important;
+}
+
+/* Make preview take full space */
+#sandpack-container .sp-preview {
+    flex: 1 !important;
+    min-width: 100% !important;
+    height: 100% !important;
+}
+
+#sandpack-container .sp-preview-container {
+    height: 100% !important;
+    background: #0a0a0a !important;
+}
+
+#sandpack-container .sp-preview-iframe {
+    height: 100% !important;
+}
+
+/* Hide Sandpack header/tabs */
+#sandpack-container .sp-tabs,
+#sandpack-container .sp-navigator {
+    display: none !important;
+}
+
+/* Dark theme overrides */
+#sandpack-container .sp-stack {
+    background: #0a0a0a !important;
+}
+
+#sandpack-container .sp-loading {
+    background: #0a0a0a !important;
+}
+
+/* Code Layout */
+.code-layout {
+    display: flex;
+    height: 100%;
+}
+
+/* File Explorer */
+.file-explorer {
+    width: 240px;
+    min-width: 240px;
+    height: 100%;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border-primary);
+    display: flex;
+    flex-direction: column;
+}
+
+.explorer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.file-tree {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all var(--transition);
+    border-left: 2px solid transparent;
+}
+
+.file-item:hover {
+    background: var(--bg-hover);
+}
+
+.file-item.active {
+    background: var(--bg-tertiary);
+    border-left-color: var(--accent-primary);
+}
+
+.file-item.folder {
+    font-weight: 500;
+}
+
+.file-icon {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.file-icon.folder-icon {
+    background: var(--terminal-yellow);
+}
+
+.file-icon.tsx-icon {
+    background: var(--terminal-blue);
+}
+
+.file-icon.html-icon {
+    background: var(--terminal-orange);
+}
+
+.file-icon.css-icon {
+    background: var(--terminal-purple);
+}
+
+.file-icon.json-icon {
+    background: var(--terminal-green);
+}
+
+.file-icon.js-icon {
+    background: var(--terminal-yellow);
+}
+
+.file-icon.default-icon {
+    background: var(--text-muted);
+}
+
+.file-name {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.file-item.active .file-name {
+    color: var(--text-primary);
+}
+
+.file-item.indent-1 {
+    padding-left: 36px;
+}
+
+.file-item.indent-2 {
+    padding-left: 52px;
+}
+
+/* Code Editor */
+.code-editor-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.editor-tabs {
+    display: flex;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-primary);
+    overflow-x: auto;
+    min-height: 44px;
+}
+
+.editor-tab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    border-right: 1px solid var(--border-primary);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+    min-height: 44px;
+}
+
+.editor-tab:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.editor-tab.active {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.editor-tab .tab-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--terminal-green);
+}
+
+.editor-tab .close-tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity var(--transition);
+    font-size: 14px;
+}
+
+.editor-tab:hover .close-tab {
+    opacity: 0.5;
+}
+
+.editor-tab .close-tab:hover {
+    opacity: 1;
+    background: var(--bg-hover);
+}
+
+#monacoEditor {
+    flex: 1;
+    width: 100%;
+}
+
+/* Console/Logs Panel */
+.logs-panel {
+    position: fixed;
+    bottom: 0;
+    left: var(--chat-width);
+    right: 0;
+    height: 200px;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-primary);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    animation: slideUp 200ms ease;
+}
+
+.logs-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-primary);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.logs-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.logs-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+}
+
+.log-entry {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 6px;
+    line-height: 1.5;
+}
+
+.log-time {
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.log-level {
+    width: 50px;
+    flex-shrink: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.log-level.info {
+    color: var(--terminal-blue);
+}
+
+.log-level.warn {
+    color: var(--terminal-yellow);
+}
+
+.log-level.error {
+    color: var(--terminal-red);
+}
+
+.log-message {
+    flex: 1;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 200ms ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    width: 90%;
+    max-width: 520px;
+    max-height: 85vh;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95) translateY(20px);
+    transition: transform 200ms ease;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.modal-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.modal-body {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 24px;
+    border-top: 1px solid var(--border-primary);
+}
+
+/* Fullscreen */
+.fullscreen .chat-panel {
+    display: none;
+}
+
+.fullscreen .main-panel {
+    width: 100%;
+}
+
+.fullscreen .logs-panel {
+    left: 0;
+}
