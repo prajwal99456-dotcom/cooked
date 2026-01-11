@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Frame</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #111;
+        }
+        #preview-host {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="preview-host"></div>
+
+    <script type="module">
+        import { loadSandpackClient } from 'https://esm.sh/@codesandbox/sandpack-client@2.13.9';
+
+        const host = document.getElementById('preview-host');
+        let client = null;
+
+        const defaultDependencies = {
+            "react": "^18.2.0",
+            "react-dom": "^18.2.0",
+            "framer-motion": "^10.18.0",
+            "lucide-react": "^0.300.0",
+            "three": "^0.160.0",
+            "@react-three/fiber": "^8.15.14",
+            "@react-three/drei": "^9.99.0",
+            "zustand": "^4.5.0",
+            "uuid": "^9.0.1",
+            "clsx": "^2.1.0",
+            "tailwind-merge": "^2.2.1"
+        };
+
+        const indexTsx = `
+import React, { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./styles.css";
+import App from "./App";
+
+const root = createRoot(document.getElementById("root"));
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);`;
+
+        // Default files to prevent crash on init
+        const initialFiles = {
+            "/index.tsx": { code: indexTsx },
+            "/styles.css": { code: "/* Styles */" },
+            "/App.tsx": { code: "export default function App() { return <div>Loading...</div> }" }
+        };
+
+        async function initSandpack() {
+            try {
+                client = await loadSandpackClient(host, {
+                    files: initialFiles,
+                    template: "react-ts",
+                    dependencies: defaultDependencies,
+                    entry: "/index.tsx",
+                    showOpenInCodeSandbox: false,
+                    showErrorScreen: true,
+                    showLoadingScreen: true,
+                });
+
+                // Notify parent that we are ready
+                window.parent.postMessage({ type: 'SANDPACK_READY' }, '*');
+
+            } catch (error) {
+                console.error("Sandpack initialization failed:", error);
+                window.parent.postMessage({ type: 'SANDPACK_ERROR', error: error.message }, '*');
+            }
+        }
+
+        // Listen for messages from the parent
+        window.addEventListener('message', async (event) => {
+            if (!client) return;
+
+            const data = event.data;
+            if (!data || !data.type) return;
+
+            if (data.type === 'UPDATE_FILES') {
+                try {
+                    const newFiles = {};
+
+                    // Always ensure index.tsx exists and is correct
+                    newFiles['/index.tsx'] = { code: indexTsx };
+
+                    // Process incoming files
+                    for (const [path, content] of Object.entries(data.files)) {
+                        const normalizedPath = path.startsWith('/') ? path : '/' + path;
+                        newFiles[normalizedPath] = { code: content };
+                    }
+
+                    // Update the client
+                    client.updateSandbox({
+                        files: newFiles,
+                        dependencies: defaultDependencies // Ensure dependencies persist
+                    });
+
+                    window.parent.postMessage({ type: 'FILES_UPDATED' }, '*');
+                } catch (error) {
+                    console.error("Failed to update files:", error);
+                    window.parent.postMessage({ type: 'SANDPACK_ERROR', error: error.message }, '*');
+                }
+            }
+        });
+
+        initSandpack();
+    </script>
+</body>
+</html>
