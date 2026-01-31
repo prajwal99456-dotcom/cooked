@@ -1,7 +1,7 @@
 {
     "provider": "openrouter",
     "model": "xiaomi\/mimo-v2-flash:free",
-    "api_key": "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",
+    "api_key": "AAPI KEY",
     "endpoint": "https:\/\/openrouter.ai\/api",
     "system_instructions": "",
     "auto_detect_endpoint": true,
